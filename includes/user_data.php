@@ -24,4 +24,59 @@ function check_params($username, $password)
 		}
 	}
 }
+
+function create_user($username, $password, $type)
+{
+	$table = 'users';
+	$fields['user_name'] = "'".$username."'";
+	$fields['user_password'] = "'".$password."'";
+	$fields['user_type'] = $type;
+	return (insert($table, $fields));
+}
+
+function update_user($id, $username, $password, $type)
+{
+	$table = 'users';
+	$fields['user_name'] = "'".$username."'";
+	$fields['user_password'] = "'".$password."'";
+	$fields['user_type'] = $type;
+	$where['user_id'] = $id;
+	return (update($table, $fields, $where));
+}
+
+function delete_user($id)
+{
+	$table = 'users';
+	$where['id'] = 3;
+	return (delete($table, $where));
+}
+
+function get_users()
+{
+	$table = 'users';
+	$where = NULL;
+	$res = get($table, $where);
+	return (ret_data(get($table, $where)));
+}
+
+function get_users_by_id($id)
+{
+	$table = 'users';
+	$where['user_id'] = $id;
+	return (ret_data(get($table, $where)));
+}
+
+function get_users_by_name($name)
+{
+	$table = 'users';
+	$where['user_name'] = "'".$name."'";
+	return (ret_data(get($table, $where)));
+}
+
+function get_users_by_type($type)
+{
+	$table = 'users';
+	$where['user_type'] = $type;
+	return (ret_data(get($table, $where)));
+}
 ?>
