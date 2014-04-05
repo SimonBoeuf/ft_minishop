@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 05 Avril 2014 à 14:14
+-- Généré le: Sam 05 Avril 2014 à 17:13
 -- Version du serveur: 5.6.12-log
 -- Version de PHP: 5.4.12
 
@@ -78,16 +78,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_name` varchar(256) NOT NULL,
   `user_password` varchar(256) NOT NULL,
   `user_type` int(11) NOT NULL DEFAULT '2',
+  `cart_id` int(11) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_name` (`user_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `users`
 --
 
-INSERT IGNORE INTO `users` (`user_id`, `user_name`, `user_password`, `user_type`) VALUES
-(1, 'root', 'root', 2);
+INSERT IGNORE INTO `users` (`user_id`, `user_name`, `user_password`, `user_type`, `cart_id`) VALUES
+(1, 'root', 'root', 1, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

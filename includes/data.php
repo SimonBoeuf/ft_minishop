@@ -87,7 +87,7 @@ function delete($table, $where)
 				$query .=" AND ";
 			$query .= "$key = $val";
 		}
-		$query .= " ORDERY BY ;";
+		$query .= ";";
 		if (!$mysqli->query($query))
 			return (FALSE);
 		else
@@ -95,7 +95,7 @@ function delete($table, $where)
 	}
 }
 
-function get($table, $where, $order = NULL)
+function get($table, $where, $order = NULL, $like = 0)
 {
 	if ($mysqli = connect_db())
 	{
@@ -110,7 +110,95 @@ function get($table, $where, $order = NULL)
 					$firstrow = 0;
 				else
 					$query .=" AND ";
-				$query .= "$key = $val";
+				$query .= "$key";
+				if ($like)
+					$query .= " LIKE '%".trim($val, "'")."%'";
+				else
+					$query .= " = $val";
+			}
+		}
+		if ($order)
+			$query .=" ORDER BY $order";
+		$query .= ";";
+		if (!$res = $mysqli->query($query))
+			return (FALSE);
+		else
+			return ($res);
+	}
+}
+
+function get_higher_than($table, $where, $order = NULL)
+{
+	if ($mysqli = connect_db())
+	{
+		$firstrow = 1;
+		$query = "SELECT * FROM $table";
+		if ($where)
+		{
+			$query .= " WHERE ";
+			foreach($where as $key=>$val)
+			{
+				if ($firstrow)
+					$firstrow = 0;
+				else
+					$query .=" AND ";
+				$query .= "$key >= $val";
+			}
+		}
+		if ($order)
+			$query .=" ORDER BY $order";
+		$query .= ";";
+		if (!$res = $mysqli->query($query))
+			return (FALSE);
+		else
+			return ($res);
+	}
+}
+
+function get_lower_than($table, $where, $order = NULL)
+{
+	if ($mysqli = connect_db())
+	{
+		$firstrow = 1;
+		$query = "SELECT * FROM $table";
+		if ($where)
+		{
+			$query .= " WHERE ";
+			foreach($where as $key=>$val)
+			{
+				if ($firstrow)
+					$firstrow = 0;
+				else
+					$query .=" AND ";
+				$query .= "$key <= $val";
+			}
+		}
+		if ($order)
+			$query .=" ORDER BY $order";
+		$query .= ";";
+		if (!$res = $mysqli->query($query))
+			return (FALSE);
+		else
+			return ($res);
+	}
+}
+
+function get_between($table, $where, $order = NULL)
+{
+	if ($mysqli = connect_db())
+	{
+		$firstrow = 1;
+		$query = "SELECT * FROM $table";
+		if ($where)
+		{
+			$query .= " WHERE ";
+			foreach($where as $key=>$val)
+			{
+				if ($firstrow)
+					$firstrow = 0;
+				else
+					$query .=" AND ";
+				$query .= "$key > ".$val['min']." AND $key < ".$val['max'];
 			}
 		}
 		if ($order)
@@ -129,6 +217,8 @@ function ret_data($res)
 	{
 		while ($row = $res->fetch_assoc())
 			$ret[] = $row;
+		if (!isset($ret))
+			$ret = FALSE;
 	}
 	else
 		$ret = FALSE;

@@ -1,5 +1,5 @@
 <?php
-include("data.php");
+include_once("data.php");
 
 function get_user_info($username)
 {
@@ -47,7 +47,7 @@ function update_user($id, $username, $password, $type)
 function delete_user($id)
 {
 	$table = 'users';
-	$where['id'] = 3;
+	$where['user_id'] = $id;
 	return (delete($table, $where));
 }
 
@@ -59,18 +59,18 @@ function get_users()
 	return (ret_data(get($table, $where)));
 }
 
-function get_users_by_id($id)
+function get_users_by_id($id, $order = NULL)
 {
 	$table = 'users';
 	$where['user_id'] = $id;
 	return (ret_data(get($table, $where)));
 }
 
-function get_users_by_name($name)
+function get_users_by_name($name, $order = NULL, $like = 1)
 {
 	$table = 'users';
 	$where['user_name'] = "'".$name."'";
-	return (ret_data(get($table, $where)));
+	return (ret_data(get($table, $where, $order, $like)));
 }
 
 function get_users_by_type($type)

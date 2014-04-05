@@ -1,5 +1,5 @@
 <?php
-include ("includes/user_data.php");
+include_once ("includes/user_data.php");
 session_start();
 if (isset($_POST['logout']))
 	unset($_SESSION);
