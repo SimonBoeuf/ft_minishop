@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 05 Avril 2014 à 17:13
+-- Généré le: Sam 05 Avril 2014 à 19:40
 -- Version du serveur: 5.6.12-log
 -- Version de PHP: 5.4.12
 
@@ -28,13 +28,13 @@ USE `minishop`;
 -- Structure de la table `cart`
 --
 
-DROP TABLE IF EXISTS `cart`;
 CREATE TABLE IF NOT EXISTS `cart` (
   `cart_id` int(11) NOT NULL,
   `cart_user` int(11) NOT NULL,
   `cart_product` int(11) NOT NULL,
   PRIMARY KEY (`cart_id`),
-  UNIQUE KEY `cart_user` (`cart_user`,`cart_product`)
+  UNIQUE KEY `cart_user` (`cart_user`,`cart_product`),
+  KEY `cart_product` (`cart_product`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -43,14 +43,13 @@ CREATE TABLE IF NOT EXISTS `cart` (
 -- Structure de la table `categories`
 --
 
-DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `cat_id` int(11) NOT NULL AUTO_INCREMENT,
   `cat_name` varchar(256) NOT NULL,
   `cat_description` text,
   PRIMARY KEY (`cat_id`),
   UNIQUE KEY `cat_name` (`cat_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
 
 -- --------------------------------------------------------
 
@@ -58,13 +57,14 @@ CREATE TABLE IF NOT EXISTS `categories` (
 -- Structure de la table `products`
 --
 
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_name` varchar(256) NOT NULL,
   `product_description` text,
+  `product_price` float NOT NULL,
+  `product_category` int(11) NOT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 -- --------------------------------------------------------
 
@@ -72,23 +72,32 @@ CREATE TABLE IF NOT EXISTS `products` (
 -- Structure de la table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(256) NOT NULL,
   `user_password` varchar(256) NOT NULL,
   `user_type` int(11) NOT NULL DEFAULT '2',
-  `cart_id` int(11) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_name` (`user_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=105 ;
 
 --
 -- Contenu de la table `users`
 --
 
-INSERT IGNORE INTO `users` (`user_id`, `user_name`, `user_password`, `user_type`, `cart_id`) VALUES
-(1, 'root', 'root', 1, 0);
+INSERT INTO `users` (`user_id`, `user_name`, `user_password`, `user_type`) VALUES
+(1, 'root', 'root', 1);
+
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`cart_user`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`cart_product`) REFERENCES `products` (`product_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

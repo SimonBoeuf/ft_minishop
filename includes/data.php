@@ -127,6 +127,38 @@ function get($table, $where, $order = NULL, $like = 0)
 	}
 }
 
+function get_count($table, $where, $order = NULL, $like = 0)
+{
+	if ($mysqli = connect_db())
+	{
+		$firstrow = 1;
+		$query = "SELECT count(*) as count FROM $table";
+		if ($where)
+		{
+			$query .= " WHERE ";
+			foreach($where as $key=>$val)
+			{
+				if ($firstrow)
+					$firstrow = 0;
+				else
+					$query .=" AND ";
+				$query .= "$key";
+				if ($like)
+					$query .= " LIKE '%".trim($val, "'")."%'";
+				else
+					$query .= " = $val";
+			}
+		}
+		if ($order)
+			$query .=" ORDER BY $order";
+		$query .= ";";
+		if (!$res = $mysqli->query($query))
+			return (FALSE);
+		else
+			return ($res);
+	}
+}
+
 function get_higher_than($table, $where, $order = NULL)
 {
 	if ($mysqli = connect_db())
