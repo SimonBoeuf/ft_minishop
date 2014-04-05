@@ -1,9 +1,12 @@
 <?php
 include ("includes/user_data.php");
 session_start();
+unset($_SESSION);
+$error = "";
 $username = "";
 if (isset($_SESSION['username']))
 {
+	var_dump($_SESSION);
 	$_SESSION['user_info'] = get_user_info($_SESSION['username']);
 	include ("main_page.php");
 }
@@ -21,12 +24,10 @@ elseif (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['pas
 		$error = "Invalid connectoin details";
 	}
 }
-else
-{
-	$form = '<form name="loginform" action="#" method="POST">';
-	$form .= 'Login : <input type="text" name="username" value="'.$username.'" />';
-	$form .= 'Password : <input type="password" name="password" />';
-	$form .= '<input type="submit" value="Connect" name="login" />';
-	echo $form;
-}
+$form = '<form name="loginform" action="#" method="POST">';
+$form .= 'Login : <input type="text" name="username" value="'.$username.'" />';
+$form .= 'Password : <input type="password" name="password" />';
+$form .= '<input type="submit" value="Connect" name="login" />';
+echo $form;
+echo $error;
 ?>

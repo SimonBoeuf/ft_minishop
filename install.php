@@ -4,7 +4,7 @@
 <?php
 $mysqli = new mysqli("localhost", "root", "", "mysql");
 if ($mysqli->connect_errno) {
-    echo "Failed to connect to server : ". $mysqli->connect_errno;
+    echo "Failed to connect to server : ". mysqli_connect_error();
 }
 else
 {
