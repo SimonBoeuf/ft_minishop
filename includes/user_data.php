@@ -5,8 +5,9 @@ function get_user_info($username)
 {
 	if ($mysqli = connect_db())
 	{
-		$res = $mysqli->query("SELECT user.id, user.name, ");
-		//$row = $res->fetch_assoc();
+		$res = $mysqli->query("SELECT user_id, user_name, user_type FROM users where user_name ='$username'");
+		$row = $res->fetch_assoc();
+		return $row;
 	}
 }
 
