@@ -1,6 +1,7 @@
 <HTML>
 <HEAD><meta http-equiv="content-type" content="text/html; charset=utf-8" /></HEAD>
 <BODY>
+
 <?php
 $mysqli = new mysqli("localhost", "root", "", "mysql");
 if ($mysqli->connect_errno) {
