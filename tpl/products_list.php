@@ -3,7 +3,7 @@
 	include_once("./includes/category_data.php");
 	$products = get_products();
 	$add = '<form action="./tpl/add_product.php"><input type="submit" value="Add" /></form>';
-	$table = '<table border="1"><th name="id">ID</th><th name="name">Name</th><th name="description">Description</th><th name="price">Price</th><th name="Category">Category</th><th name="update"></th><th name="delete"></th>';
+	$table = '<table border="1"><th name="id">ID</th><th name="name">Name</th><th name="description">Description</th><th name="price">Price</th><th name="Category">Category</th></th>';
 	foreach($products as $row)
 	{
 		foreach($row as $key=>$val)
