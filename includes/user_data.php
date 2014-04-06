@@ -5,8 +5,8 @@ function get_user_info($username)
 {
 	if ($mysqli = connect_db())
 	{
-		$res = $mysqli->query("SELECT user_id, user_name, user_type FROM users where user_name ='$username'");
-		$row = $res->fetch_assoc();
+		$res = mysqli_query($mysqli, "SELECT user_id, user_name, user_type FROM users where user_name ='$username'");
+		$row = mysqli_fetch_assoc($res);
 		return $row;
 	}
 }
@@ -16,11 +16,11 @@ function check_params($username, $password)
 	if ($mysqli = connect_db())
 	{
 		$query = "SELECT count(*) as numrows FROM users WHERE user_name ='$username' AND user_password = '".hash(whirlpool, $password)."';";
-		if (!$res = $mysqli->query($query))
-			echo "Request failed : ".$mysqli->error;
+		if (!$res = mysqli_query($mysqli, $query))
+			echo "Request failed : ".mysqli_error($mysqli);
 		else
 		{
-			$row = $res->fetch_assoc();
+			$row = mysqli_fetch_assoc($res);
 			return ($row['numrows'] == 1);
 		}
 	}

@@ -16,16 +16,16 @@ if (!isset($_POST['params']))
 }
 else
 {
-	$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], "mysql");
-	if ($mysqli->connect_errno)
+	$mysqli = mysqli_connect($_POST['host'], $_POST['username'], $_POST['password'], "mysql");
+	if (!$mysqli)
 	echo "Failed to connect to server : ". mysqli_connect_error();
 	else
 	{
 		$login = $_POST['adminlogin'];
 		$password = hash(whirlpool,$_POST['adminpassword']);
 		$query = "USE minishop; INSERT INTO users (user_name, user_password, user_type) VALUES('$login','$password', 1);";
-		if (!$mysqli->multi_query(file_get_contents("sql/createdb.sql").$query))
-			echo "Failed creating database : ". $mysqli->error;
+		if (!mysqli_multi_query($mysqli, file_get_contents("sql/createdb.sql").$query))
+			echo "Failed creating database : ". mysqli_error($mysqli);
 		else
 		{
 			$s = $_POST['host'].";".$_POST['username'].";".$_POST['password'];

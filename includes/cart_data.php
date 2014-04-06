@@ -59,7 +59,7 @@ function is_product_in_cart($user, $product)
 	$table = 'carts';
 	$where['cart_user'] = $user;
 	$where['cart_product'] = $product;
-	if (get_count($table, $where)->fetch_assoc()['count'] == 0)
+	if (mysqli_fetch_assoc(get_count($table, $where))['count'] == 0)
 		return (FALSE);
 	else
 		return (TRUE);
