@@ -34,14 +34,19 @@ $uid = $_SESSION['user_info']['user_id'];
 $uname = get_users_by_id($uid)[0]['user_name'];
 $cartview = '<div id="cart"><p class="head">Panier de '.$uname.' : </p>';
 $carts = get_carts_by_user($uid);
+$total = 0;
 foreach($carts as $cart)
 {
 	$product_name = get_products_by_id($cart['cart_product'])[0]['product_name'];
-	$cartview .= '<p class="item"><a href="tpl/viewproduct.php?product_id='.$cart['cart_product'].'">'.$product_name.'</a></p>';
+	$product_price = get_products_by_id($cart['cart_product'])[0]['product_price'];
+	$total += $product_price;
+	$cartview .= '<p class="item"><a href="tpl/viewproduct.php?product_id='.$cart['cart_product'].'">'.$product_name.'</a>'
+		." Price = ".$product_price.'</p>';
 }
 $cartview .= '</div>';
 echo $list;
 echo $cartview;
+echo "Total price = $total";
 
 function add_cart_to_session($id)
 {
