@@ -1,13 +1,15 @@
 <?php
 include_once ("../includes/product_data.php");
-if (!create_product("abc", "bcd",1, 2))
+create_cat("testcat", "testcat");
+$catid = get_cats_by_name("testcat")[0]['cat_id'];
+if (!create_product("abc", "bcd",1, $catid))
 	echo "failed creating product abc<br/>";
-if (!create_product("def", "bcd",10, 2))
+if (!create_product("def", "bcd",10, $catid))
 	echo "failed creating product abd<br/>";
 $res = get_products_by_name("def");
 $id = $res[0]['product_id'];
 $name = $res[0]['product_name'];;
-if (!update_product($id, "abd", "efg", 20, 2))
+if (!update_product($id, "abd", "efg", 20, $catid))
 	echo "failed updating abd<br/>";
 if (get_products_by_id($id)[0]['product_id'] != $id)
 	echo "Failed retrieving id of abd</br>";
@@ -27,5 +29,6 @@ $res = get_products_by_name("abc");
 $id = $res[0]['product_id'];
 if (!delete_product($id))
 	echo "failed deleting product abc<br/>";
+delete_cat($catid);
 echo "Product tests finished !<br/>";
 ?>
