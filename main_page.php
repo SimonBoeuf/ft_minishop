@@ -1,4 +1,5 @@
 <?php
+include_once("tpl/header.php");
 include_once("includes/user_data.php");
 include_once("includes/category_data.php");
 include_once("includes/product_data.php");
@@ -57,3 +58,8 @@ function add_cart_to_session($id)
 		$_SESSION['cart'][] = $id;
 }
 ?>
+<h1 id="name">Duck Wars</h1>
+		<div>
+			<img src="img/duck-05.jpg"/>
+			<p>All the ducks you've always been dreaming about...</p>
+		</div>
