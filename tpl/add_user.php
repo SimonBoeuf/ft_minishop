@@ -56,7 +56,7 @@ else
 			$form = '<form action="#" method="POST" name="adduserform">';
 			$form .='<input type="hidden" name="user_id" value="'.$user_id.'" />';
 			$form .= 'Login : <input type="text" name="user_name" value ="'.$user_name.'" />';
-			$form .= 'Password : <input type="text" name="user_password" value ="'.$user_password.'" />';
+			$form .= 'Password : <input type="text" name="user_password" />';
 			$form .= 'Type : <select name="user_type"><option value="1" ';
 			if ($user_type == 1)
 				$form .= 'selected="selected" ';
