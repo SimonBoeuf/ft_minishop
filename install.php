@@ -22,15 +22,20 @@ else
 	else
 	{
 		$login = $_POST['adminlogin'];
-		$password = hash(whirlpool,$_POST['adminpassword']);
-		$query = "USE minishop; INSERT INTO users (user_name, user_password, user_type) VALUES('$login','$password', 1);";
-		if (!mysqli_multi_query($mysqli, file_get_contents("sql/createdb.sql").$query))
-			echo "Failed creating database : ". mysqli_error($mysqli);
+		$password = hash(whirlpool,trim($_POST['adminpassword']));
+		if (strlen($login) < 1 || strlen($login) > 255 || strlen(trim($_POST['adminpassword'])) < 1 || strlen(trim($_POST['adminpassword'])) > 255)
+			echo "Bad admin credentials";
 		else
 		{
-			$s = $_POST['host'].";".$_POST['username'].";".$_POST['password'];
-			if (file_put_contents("includes/conf", $s));
-			echo "Installed ! Your root access is /root. You can now remove this file";
+			$query = "USE minishop; INSERT INTO users (user_name, user_password, user_type) VALUES('$login','$password', 1);";
+			if (!mysqli_multi_query($mysqli, file_get_contents("sql/createdb.sql").$query))
+				echo "Failed creating database : ". mysqli_error($mysqli);
+			else
+			{
+				$s = $_POST['host'].";".$_POST['username'].";".$_POST['password'];
+				if (file_put_contents("includes/conf", $s));
+				echo "Installed ! Your root access is /root. You can now remove this file";
+			}
 		}
 	}
 }
