@@ -15,7 +15,8 @@ function check_params($username, $password)
 {
 	if ($mysqli = connect_db())
 	{
-		if (!$res = $mysqli->query("SELECT count(*) as numrows FROM users WHERE user_name ='$username' AND user_password = '$password';"))
+		$query = "SELECT count(*) as numrows FROM users WHERE user_name ='$username' AND user_password = '".hash(whirlpool, $password)."';";
+		if (!$res = $mysqli->query($query))
 			echo "Request failed : ".$mysqli->error;
 		else
 		{
@@ -29,7 +30,7 @@ function create_user($username, $password, $type)
 {
 	$table = 'users';
 	$fields['user_name'] = "'".$username."'";
-	$fields['user_password'] = "'".$password."'";
+	$fields['user_password'] = "'".hash(whirlpool, $password)."'";
 	$fields['user_type'] = $type;
 	return (insert($table, $fields));
 }
@@ -38,7 +39,7 @@ function update_user($id, $username, $password, $type)
 {
 	$table = 'users';
 	$fields['user_name'] = "'".$username."'";
-	$fields['user_password'] = "'".$password."'";
+	$fields['user_password'] = "'".hash(whirlpool, $password)."'";
 	$fields['user_type'] = $type;
 	$where['user_id'] = $id;
 	return (update($table, $fields, $where));

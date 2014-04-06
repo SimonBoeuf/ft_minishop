@@ -2,7 +2,7 @@
 <HEAD><meta http-equiv="content-type" content="text/html; charset=utf-8" /></HEAD>
 <BODY>
 <?php
-$mysqli = new mysqli("localhost", "root", "", "mysql");
+$mysqli = new mysqli("localhost", "root", "rootoor", "mysql");
 if ($mysqli->connect_errno) {
     echo "Failed to connect to server : ". mysqli_connect_error();
 }

@@ -3,7 +3,10 @@ include("tpl/header.html");
 include_once ("includes/user_data.php");
 session_start();
 if (isset($_POST['logout']))
+{
+	session_destroy();
 	unset($_SESSION);
+}
 $error = 0;
 $username = "";
 if (isset($_SESSION['username']))

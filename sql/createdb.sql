@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_password`, `user_type`) VALUES
-(1, 'root', 'root', 1);
+(1, 'root', '06948d93cd1e0855ea37e75ad516a250d2d0772890b073808d831c438509190162c0d890b17001361820cffc30d50f010c387e9df943065aa8f4e92e63ff060c', 1);
 
 --
 -- Contraintes pour les tables exportées
