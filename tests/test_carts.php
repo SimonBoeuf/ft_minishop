@@ -1,12 +1,15 @@
 <?php
 include_once ("../includes/cart_data.php");
 include_once ("../includes/user_data.php");
+include_once ("../includes/category_data.php");
 include_once ("../includes/product_data.php");
 $u1 = create_user("abc", "abc", 2);
 $u2 = create_user("def", "def", 2);
-$p1 = create_product("abc", "abc", 1, 1);
-$p2 = create_product("def", "def", 1, 1);
-$p3 = create_product("ghi", "ghi", 1, 1);
+$cat = create_cat("testcat", "");
+$catid = get_cats_by_name("testcat")[0]['cat_id'];
+$p1 = create_product("abc", "abc", 1, $catid);
+$p2 = create_product("def", "def", 1, $catid);
+$p3 = create_product("ghi", "ghi", 1, $catid);
 if (!create_cart(get_users_by_name("abc")[0]['user_id'], get_products_by_name("abc")[0]['product_id']))
 	echo "failed creating first cart<br/>";
 if (!create_cart(get_users_by_name("def")[0]['user_id'], get_products_by_name("def")[0]['product_id']))
@@ -40,5 +43,6 @@ delete_user(get_users_by_name("def")[0]['user_id']);
 delete_product(get_products_by_name("abc")[0]['product_id']);
 delete_product(get_products_by_name("def")[0]['product_id']);
 delete_product(get_products_by_name("ghi")[0]['product_id']);
+delete_cat($catid);
 echo "Cart tests finished !<br/>";
 ?>
