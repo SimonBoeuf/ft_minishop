@@ -1,19 +1,22 @@
 
 .entry{
+	float: left;
 	align: center;
 }
 
-.entry ul li{
-	display: inline;
-	margin: 100px, 100px;
+.entry li{
+	display: inline-block;
 }
 
-.entry ul li a{
+.entry li a{
 	background-color: yellow;
+	padding: 100px 100px;
 }
 
-header {
-	
+
+form {
+	display: block;
+	clear: both;
 }
 
 #name {
