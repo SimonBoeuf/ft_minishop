@@ -1,5 +1,5 @@
 <?php
-include("tpl/header.html");
+include("tpl/header.php");
 include_once ("includes/user_data.php");
 session_start();
 if (isset($_POST['logout']))
@@ -48,3 +48,7 @@ if ($error)
 }
 include("tpl/footer.html");
 ?>
+<div>
+	<h2>Des produits uniques...</h2>
+	<div><img src ="" /></div>
+</div>

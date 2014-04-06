@@ -1,22 +1,25 @@
 
-.entry{
-	float: left;
+.entry {
+  position: fixed;
+  width: 100%;
 	align: center;
 }
 
-.entry li{
+.entry li {
 	display: inline-block;
+  background-color: yellow;
+  height: 100px;
+  width: 18%;
 }
 
-.entry li a{
-	background-color: yellow;
-	padding: 100px 100px;
+.entry li p {
+    font-size: 100%;
+    text-decoration: none;
+    color: red;
 }
 
-
-form {
-	display: block;
-	clear: both;
+.entry li p:hover {
+  color: green;
 }
 
 #name {
@@ -33,11 +36,6 @@ form {
 
 img {
 	margin: auto;
-}
-
-.login {
-	float: right;
-	background-color: green;
 }
 
 #submit:hover {
