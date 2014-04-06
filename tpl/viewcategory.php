@@ -15,5 +15,6 @@ else
 	$view .='</div>';
 	echo $view;
 }
+echo '<form action="../index.php"><input type="submit" value="Home" /></form>';
 include("footer.html");
 ?>
