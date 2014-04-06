@@ -42,7 +42,7 @@ function get_orders_by_user($user)
 {
 	$table = 'orders';
 	$where['order_user'] = $user;
-	return (ret_data(get($table, $where)));
+	return (ret_data(get($table, $where, 'order_id DESC')));
 }
 
 ?>

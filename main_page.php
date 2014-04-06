@@ -2,8 +2,25 @@
 include_once("tpl/header.php");
 include_once("includes/user_data.php");
 include_once("includes/category_data.php");
+include_once("includes/order_data.php");
+include_once("includes/order_detail_data.php");
 include_once("includes/product_data.php");
 include_once("includes/cart_data.php");
+if (isset($_POST['validcart']))
+{
+	$user_id = $_SESSION['user_info']['user_id'];
+	create_order($user_id);
+	$order_id = get_orders_by_user($user_id)[0]['order_id'];
+	$carts = get_carts_by_user($user_id);
+	foreach($carts as $cart)
+	{
+		foreach($cart as $key=>$val)
+			$$key = $val;
+		create_order_detail($order_id, $cart_product);
+		delete_cart($cart_id);
+	}
+	echo "Order complete !";
+}
 if (isset($_POST['cart']) && isset($_POST['product_id']))
 {
 	if (isset($_SESSION['user_info']))
@@ -45,6 +62,8 @@ $cartview .= '</div>';
 echo $list;
 echo $cartview;
 echo "Total price = $total";
+if ($total > 0)
+	echo '<form action="#" method="POST"><input type="submit" value="Buy this shit" name="validcart"/></form>';
 
 function add_cart_to_session($id)
 {
