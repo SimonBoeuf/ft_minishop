@@ -1,15 +1,18 @@
 <?php
+include("tpl/header.html");
 include_once ("includes/user_data.php");
 session_start();
 if (isset($_POST['logout']))
 	unset($_SESSION);
-unset($_SESSION);
 $error = 0;
 $username = "";
 if (isset($_SESSION['username']))
 {
 	$_SESSION['user_info'] = get_user_info($_SESSION['username']);
-	include ("main_page.php");
+	if ($_SESSION['user_info']['user_type'] == 2)
+		include ("main_page.php");
+	elseif ($_SESSION['user_info']['user_type'] == 1)
+		include ("admin_page.php");
 }
 elseif (isset($_POST['guest']))
 {
@@ -45,4 +48,5 @@ if ($error)
 	echo $form;
 	echo $error != 1 ? $error : "";
 }
+include("tpl/footer.html");
 ?>
