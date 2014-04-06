@@ -62,6 +62,20 @@ function add_cart_to_session($id)
 	if (!exists)
 		$_SESSION['cart'][] = $id;
 }
+
+function is_product_in_session_cart($id)
+{
+	$exists = 0;
+	if (isset($_SESSION['cart']))
+	{
+		foreach($_SESSION['cart'] as $val)
+		{
+			if ($val == $id)
+				$exists = 1;
+		}
+	}
+	return ($exists);
+}
 ?>
 <h1 id="name">Duck Wars</h1>
 		<div>

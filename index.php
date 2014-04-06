@@ -31,6 +31,8 @@ elseif (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['pas
 	else
 		$username = $_POST['username'];
 }
+else
+	include("main_page.php");
 include("tpl/footer.html");
 ?>
 <div>
