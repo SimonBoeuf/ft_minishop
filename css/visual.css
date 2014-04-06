@@ -1,0 +1,29 @@
+
+.entry{
+	align: center;
+}
+
+.entry ul li{
+	display: inline;
+	padding: 100px, 100px;
+}
+
+.entry ul li a{
+	background-color: yellow;
+}
+
+header {
+	
+}
+
+#name {
+	text-align: center;
+	font-family: tahoma;
+	font-weight: bold;
+	font-size: 40px;
+	color: #0000FF;
+}
+
+#name :hover{
+	color: #FF0000;
+};
