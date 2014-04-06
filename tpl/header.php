@@ -16,7 +16,7 @@
 	$disconnected = '<p>Connection</p><form name="loginform" action="#" method="POST">
 	Login : <input type="text" name="username" value="" /><br />
 	Password : <input type="password" name="password" />
-	<input id="submit" type="submit" name="sm" value="Connect" name="login" /></form>';
+	<input id="submit" type="submit" name="sm" value="Connect" name="login" />'.$error.'</form>';
 if (isset($_SESSION['username']))
 {
 		echo $connected;

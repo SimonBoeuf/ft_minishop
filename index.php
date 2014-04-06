@@ -6,8 +6,8 @@ if (isset($_POST['logout']))
 	unset($_SESSION);
 }
 include_once ("includes/user_data.php");
+$error = (isset($_POST['username']) && isset($_POST['password']) && !check_params($_POST['username'], $_POST['password'])) ? "Invalid connection details" : "";
 include("tpl/header.php");
-$error = 0;
 $username = "";
 if (isset($_SESSION['username']))
 {
@@ -17,11 +17,6 @@ if (isset($_SESSION['username']))
 	elseif ($_SESSION['user_info']['user_type'] == 1)
 		include ("admin_page.php");
 }
-/*elseif (isset($_POST['guest']))
-{
-	$_SESSION['guest'] = 1;
-	include ("main_page.php");
-}*/
 elseif (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['password']))
 {
 	if (check_params($_POST['username'], $_POST['password']) == 1)
@@ -34,17 +29,7 @@ elseif (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['pas
 			include ("admin_page.php");
 	}
 	else
-	{
 		$username = $_POST['username'];
-		$error = "Invalid connectoin details";
-	}
-}
-else
-	$error = 1;
-if ($error)
-{
-	include("tpl/form.html");
-	echo $error != 1 ? $error : "";
 }
 include("tpl/footer.html");
 ?>
