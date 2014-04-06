@@ -17,11 +17,6 @@ if (isset($_SESSION['username']))
 	elseif ($_SESSION['user_info']['user_type'] == 1)
 		include ("admin_page.php");
 }
-/*elseif (isset($_POST['guest']))
-{
-	$_SESSION['guest'] = 1;
-	include ("main_page.php");
-}*/
 elseif (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['password']))
 {
 	if (check_params($_POST['username'], $_POST['password']) == 1)
