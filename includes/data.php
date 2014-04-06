@@ -1,7 +1,8 @@
 <?php
 function connect_db()
 {
-	$mysqli = new mysqli("localhost", "root", "rootoor", "minishop");
+	$data = explode(";", file_get_contents("includes/conf", true));
+	$mysqli = new mysqli($data[0], $data[1], $data[2], "minishop");
 	if ($mysqli->connect_errno)
 	{
 		echo "Database connection failed : ". mysqli_connect_error();
