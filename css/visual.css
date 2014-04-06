@@ -1,19 +1,22 @@
 
 .entry{
+	float: left;
 	align: center;
 }
 
-.entry ul li{
-	display: inline;
-	padding: 100px, 100px;
+.entry li{
+	display: inline-block;
 }
 
-.entry ul li a{
+.entry li a{
 	background-color: yellow;
+	padding: 100px 100px;
 }
 
-header {
-	
+
+form {
+	display: block;
+	clear: both;
 }
 
 #name {
@@ -24,6 +27,19 @@ header {
 	color: #0000FF;
 }
 
-#name :hover{
+#name:hover{
 	color: #FF0000;
+};
+
+img {
+	margin: auto;
+}
+
+.login {
+	float: right;
+	background-color: green;
+}
+
+#submit:hover {
+	background-color: purple;
 };
