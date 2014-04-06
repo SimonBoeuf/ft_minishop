@@ -1,3 +1,4 @@
+<form action="./tpl/add_categories.php"><input type="submit" value="Add" /></form>
 <?php
 	include_once("./includes/category_data.php");
 	$users = get_cats(); ?>

@@ -13,7 +13,7 @@ else
 		foreach($_POST as $key=>$val)
 			$$key = $val;
 			if (create_cat($cat_name, $cat_description))
-				echo "User successfully created !";
+				echo "Category successfully created !";
 			else
 				echo "Sorry, something went wrong... Try again later ?";
 		echo '<a href="../index.php">Go back to admin home</a>';
@@ -36,8 +36,8 @@ else
 			if (isset($_GET['cat_id']))
 			{
 				$action = 2;
-				$user = get_cats_by_id($_GET['cat_id'])[0];
-				foreach($user as $key=>$val)
+				$cat = get_cats_by_id($_GET['cat_id'])[0];
+				foreach($cat as $key=>$val)
 					$$key = $val;
 			}
 		}
