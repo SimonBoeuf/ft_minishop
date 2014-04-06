@@ -3,6 +3,8 @@ include_once("includes/user_data.php");
 include_once("includes/category_data.php");
 include_once("includes/product_data.php");
 include_once("includes/cart_data.php");
+$logout = '<form name="logoutform" action="index.php" method="POST"><input type="submit" name="logout" value="Log out" /></form>';
+echo $logout;
 $cats = get_cats();
 $list = '<ul id="menu-accordeon">';
 foreach($cats as $cat)
