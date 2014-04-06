@@ -5,7 +5,7 @@
 
 .entry ul li{
 	display: inline;
-	padding: 100px, 100px;
+	margin: 100px, 100px;
 }
 
 .entry ul li a{
@@ -24,6 +24,19 @@ header {
 	color: #0000FF;
 }
 
-#name :hover{
+#name:hover{
 	color: #FF0000;
+};
+
+img {
+	margin: auto;
+}
+
+.login {
+	float: right;
+	background-color: green;
+}
+
+#submit:hover {
+	background-color: purple;
 };

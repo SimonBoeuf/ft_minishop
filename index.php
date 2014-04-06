@@ -43,12 +43,7 @@ else
 	$error = 1;
 if ($error)
 {
-	$form = '<form name="loginform" action="#" method="POST">';
-	$form .= 'Login : <input type="text" name="username" value="'.$username.'" />';
-	$form .= 'Password : <input type="password" name="password" />';
-	$form .= '<input type="submit" value="Connect" name="login" />';
-	$form .= '<form name="guestform"><input type="submit" name="guest" value="Continue as guest" /></form>';
-	echo $form;
+	include("tpl/form.html");
 	echo $error != 1 ? $error : "";
 }
 include("tpl/footer.html");
