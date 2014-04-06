@@ -11,8 +11,6 @@ if (isset($_POST['cart']) && isset($_POST['product_id']))
 	else
 		add_cart_to_session($_SESSION, $_POST['product_id']);
 }
-$logout = '<form name="logoutform" action="index.php" method="POST"><input type="submit" name="logout" value="Log out" /></form>';
-echo $logout;
 $cats = get_cats();
 $list = '<div id="list"><ul id="menu-accordeon">';
 foreach($cats as $cat)
