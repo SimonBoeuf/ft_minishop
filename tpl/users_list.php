@@ -8,7 +8,7 @@
 		foreach($row as $key=>$val)
 			$$key = $val;
 		$type = $user_type == 1 ? 'root' : 'user';
-		$table .= '<tr name="'.$user_id.'"><td>'.$user_id.'</td><td>'.$user_name.'</td><td>'.$type.'</td><td><a href="tpl/add_user.php?user_id='.$user_id.'">Update</a></td><td><a href="tpl/add_user.php?user_id='.$user_id.'&action=3">Delete</a></td>';
+		$table .= '<tr name="'.$user_id.'"><td>'.$user_id.'</td><td>'.$user_name.'</td><td>'.$type.'</td><td><a href="tpl/view_orders.php?user_id='.$user_id.'">View orders</a></td><td><a href="tpl/add_user.php?user_id='.$user_id.'">Update</a></td><td><a href="tpl/add_user.php?user_id='.$user_id.'&action=3">Delete</a></td>';
 	}
 	$table .= '</table>';
 	echo $add;
