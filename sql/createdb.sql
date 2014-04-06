@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 4.1.9
 -- http://www.phpmyadmin.net
 --
--- Client: localhost
--- Généré le: Sam 05 Avril 2014 à 19:40
--- Version du serveur: 5.6.12-log
--- Version de PHP: 5.4.12
+-- Host: localhost:3306
+-- Generation Time: Apr 06, 2014 at 10:31 AM
+-- Server version: 5.5.36
+-- PHP Version: 5.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,15 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données: `minishop`
+-- Database: `minishop`
 --
-CREATE DATABASE IF NOT EXISTS `minishop` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `minishop`;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `cart`
+-- Table structure for table `cart`
 --
 
 CREATE TABLE IF NOT EXISTS `cart` (
@@ -35,12 +33,12 @@ CREATE TABLE IF NOT EXISTS `cart` (
   PRIMARY KEY (`cart_id`),
   UNIQUE KEY `cart_user` (`cart_user`,`cart_product`),
   KEY `cart_product` (`cart_product`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE IF NOT EXISTS `categories` (
@@ -49,12 +47,39 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `cat_description` text,
   PRIMARY KEY (`cat_id`),
   UNIQUE KEY `cat_name` (`cat_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=62 ;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `products`
+-- Table structure for table `orders`
+--
+
+CREATE TABLE IF NOT EXISTS `orders` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_user` int(11) NOT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `orders_ibfk_2` (`order_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders_details`
+--
+
+CREATE TABLE IF NOT EXISTS `orders_details` (
+  `order_details_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `order_product` int(11) NOT NULL,
+  PRIMARY KEY (`order_details_id`),
+  KEY `orders_details_ibfk_2` (`order_product`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
 --
 
 CREATE TABLE IF NOT EXISTS `products` (
@@ -63,13 +88,14 @@ CREATE TABLE IF NOT EXISTS `products` (
   `product_description` text,
   `product_price` float NOT NULL,
   `product_category` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+  PRIMARY KEY (`product_id`),
+  KEY `product_ibfk_1` (`product_category`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -79,19 +105,34 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_type` int(11) NOT NULL DEFAULT '2',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_name` (`user_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=105 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=107 ;
 
 --
--- Contraintes pour les tables exportées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `cart`
+-- Constraints for table `cart`
 --
 ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`cart_user`) REFERENCES `users` (`user_id`),
   ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`cart_product`) REFERENCES `products` (`product_id`);
 
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`order_user`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `orders_details`
+--
+ALTER TABLE `orders_details`
+  ADD CONSTRAINT `orders_details_ibfk_2` FOREIGN KEY (`order_product`) REFERENCES `products` (`product_id`);
+
+--
+-- Constraints for table `products`
+--
 ALTER TABLE `products`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`product_category`) REFERENCES `categories` (`cat_id`);
 
