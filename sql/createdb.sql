@@ -29,7 +29,7 @@ USE `minishop`;
 --
 
 CREATE TABLE IF NOT EXISTS `cart` (
-  `cart_id` int(11) NOT NULL,
+  `cart_id` int(11) NOT NULL AUTO_INCREMENT,
   `cart_user` int(11) NOT NULL,
   `cart_product` int(11) NOT NULL,
   PRIMARY KEY (`cart_id`),

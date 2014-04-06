@@ -1,9 +1,9 @@
 <?php
 function connect_db()
 {
-	$data = explode(";", file_get_contents("includes/conf", true));
-	$mysqli = new mysqli($data[0], $data[1], $data[2], "minishop");
-	if ($mysqli->connect_errno)
+	$data = explode(";", file_get_contents($_SERVER['DOCUMENT_ROOT']."/includes/conf"));
+	$mysqli = mysqli_connect($data[0], $data[1], $data[2], "minishop");
+	if (!$mysqli)
 	{
 		echo "Database connection failed : ". mysqli_connect_error();
 		return (FALSE);
@@ -35,7 +35,7 @@ function insert($table, $fields)
 			$query .= "$val";
 		}
 		$query .=");";
-		if (!$mysqli->query($query))
+		if (!mysqli_query($mysqli, $query))
 			return (FALSE);
 		else
 			return (TRUE);
@@ -67,7 +67,7 @@ function update($table, $fields, $where)
 			$query .= "$key = $val";
 		}
 		$query .= ";";
-		if (!$mysqli->query($query))
+		if (!mysqli_query($mysqli, $query))
 			return (FALSE);
 		else
 			return (TRUE);
@@ -89,7 +89,7 @@ function delete($table, $where)
 			$query .= "$key = $val";
 		}
 		$query .= ";";
-		if (!$mysqli->query($query))
+		if (!mysqli_query($mysqli, $query))
 			return (FALSE);
 		else
 			return (TRUE);
@@ -121,7 +121,7 @@ function get($table, $where, $order = NULL, $like = 0)
 		if ($order)
 			$query .=" ORDER BY $order";
 		$query .= ";";
-		if (!$res = $mysqli->query($query))
+		if (!$res = mysqli_query($mysqli, $query))
 			return (FALSE);
 		else
 			return ($res);
@@ -153,7 +153,7 @@ function get_count($table, $where, $order = NULL, $like = 0)
 		if ($order)
 			$query .=" ORDER BY $order";
 		$query .= ";";
-		if (!$res = $mysqli->query($query))
+		if (!$res = mysqli_query($mysqli, $query))
 			return (FALSE);
 		else
 			return ($res);
@@ -181,7 +181,7 @@ function get_higher_than($table, $where, $order = NULL)
 		if ($order)
 			$query .=" ORDER BY $order";
 		$query .= ";";
-		if (!$res = $mysqli->query($query))
+		if (!$res = mysqli_query($mysqli, $query))
 			return (FALSE);
 		else
 			return ($res);
@@ -209,7 +209,7 @@ function get_lower_than($table, $where, $order = NULL)
 		if ($order)
 			$query .=" ORDER BY $order";
 		$query .= ";";
-		if (!$res = $mysqli->query($query))
+		if (!$res = mysqli_query($mysqli, $query))
 			return (FALSE);
 		else
 			return ($res);
@@ -237,7 +237,7 @@ function get_between($table, $where, $order = NULL)
 		if ($order)
 			$query .=" ORDER BY $order";
 		$query .= ";";
-		if (!$res = $mysqli->query($query))
+		if (!$res = mysqli_query($mysqli, $query))
 			return (FALSE);
 		else
 			return ($res);
@@ -248,7 +248,7 @@ function ret_data($res)
 {
 	if ($res)
 	{
-		while ($row = $res->fetch_assoc())
+		while ($row = mysqli_fetch_assoc($res))
 			$ret[] = $row;
 		if (!isset($ret))
 			$ret = FALSE;
